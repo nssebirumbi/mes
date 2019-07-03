@@ -17,7 +17,7 @@ TabController _tabController;
 @override
      void initState() {
        super.initState();
-      _tabController = new TabController(vsync: this, length: 6);
+      _tabController = new TabController(vsync: this, length: 4);
       _tabController.addListener(_handleTabSelection);
      }
      void _handleTabSelection() {
@@ -65,8 +65,6 @@ TabController _tabController;
          body: TabBarView(
            controller: _tabController,
             children: <Widget>[
-              HomeForYouTabs(),
-              HomeTopChartsTabs(),
            Container(
               height: 200.0,
               child: Center(child: Text('Category')),

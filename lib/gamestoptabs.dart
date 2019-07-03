@@ -66,43 +66,6 @@ class _GamesTopTabsState extends State<GamesTopTabs> with SingleTickerProviderSt
             ],
           ),
         ),
-        body: TabBarView(
-          controller: _tabController,
-            children: <Widget>[
-              Column(
-              children: <Widget>[
-                Center(
-                  child: Text("For you Tabs"),
-                )
-              ],
-            ),
-              GameTopChartsTabs(0xff3f51b5),
-               Container(
-              height: 200.0,
-              child: Center(child: Text('New')),
-            ),
-             Container(
-              height: 200.0,
-              child: Center(child: Text('Premium')),
-            ),
-             Container(
-              height: 200.0,
-              child: Center(child: Text('Category')),
-            ),
-             Container(
-              height: 200.0,
-              child: Center(child: Text('Events')),
-            ),
-             Container(
-              height: 200.0,
-              child: Center(child: Text('Editor Choice')),
-            ),
-             Container(
-              height: 200.0,
-              child: Center(child: Text('Family')),
-            ),
-            ],
-          ),
       ),
     );
   }
