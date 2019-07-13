@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomeTopChartsTabs extends StatefulWidget {
   final Widget child;
@@ -20,8 +19,7 @@ class _HomeTopChartsTabsState extends State<HomeTopChartsTabs> {
             height: 10.0,
           ),
           ImageContainer(),
-      
-        ],
+          ],
       ),
     );
   }

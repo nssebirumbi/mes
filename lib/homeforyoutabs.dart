@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 class HomeForYouTabs extends StatefulWidget {
   final Widget child;
 
@@ -8,7 +7,6 @@ class HomeForYouTabs extends StatefulWidget {
 
   _HomeForYouTabsState createState() => _HomeForYouTabsState();
 }
-
 class _HomeForYouTabsState extends State<HomeForYouTabs> {
   @override
   Widget build(BuildContext context) {
@@ -32,7 +30,6 @@ class _HomeForYouTabsState extends State<HomeForYouTabs> {
       ),
     );
   }
-
   Widget ImageContainer() {
     return Container(
       height: 200.0,
@@ -41,8 +38,6 @@ class _HomeForYouTabsState extends State<HomeForYouTabs> {
           fit: BoxFit.cover),
     );
   }
-
-
 Widget RecommendedApps() {
     return Material(
       color: Colors.white,
@@ -62,7 +57,6 @@ Widget RecommendedApps() {
       ),
     );
   }
-
   Widget InstalledApps() {
     return Material(
       color: Colors.white,
