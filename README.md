@@ -13,5 +13,5 @@
     -> Internship places,
     -> Advertise for schollar ships.
     -> Soccer Adverts.
-    ->Mes Afternoons mentoring
+    ->Mes Afternoons mentoring.
 </p>
