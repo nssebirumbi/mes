@@ -3,13 +3,13 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'courseyeartabs.dart';
 
 
-class GamesTopTabs extends StatefulWidget {
+class Courses extends StatefulWidget {
   int colorVal;
-  GamesTopTabs(this.colorVal);
-  _GamesTopTabsState createState() => _GamesTopTabsState();
+  Courses(this.colorVal);
+  _CoursesState createState() => _CoursesState();
 }
 
-class _GamesTopTabsState extends State<GamesTopTabs> with SingleTickerProviderStateMixin{
+class _CoursesState extends State<Courses> with SingleTickerProviderStateMixin{
   TabController _tabController;
 
   @override
@@ -62,11 +62,33 @@ class _GamesTopTabsState extends State<GamesTopTabs> with SingleTickerProviderSt
                 child: Text('Computer Engineering',style: TextStyle( color: _tabController.index == 5
                           ?  Color( widget.colorVal)
                           : Colors.grey)),
-              )
+              ),
             ],
           ),
         ),
+        body: TabBarView(
+          controller: _tabController,
+            children: <Widget>[
+              CourseYearTabs(0xff3f51b5),
+              CourseYearTabs(0xff3f51b5),
+              CourseYearTabs(0xff3f51b5),
+              CourseYearTabs(0xff3f51b5),
+              CourseYearTabs(0xff3f51b5),
+            ],
+          ),
       ),
     );
   }
+}
+
+Widget TopFreeApps() {
+    return Container(
+      child: ListView(
+        scrollDirection: Axis.vertical,
+        children: <Widget>[
+          SizedBox(height: 40.0)
+          
+        ],
+      ),
+    );
 }

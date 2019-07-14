@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutternestedtabsapp/semester.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:path/path.dart';
+import 'semester.dart';
 
-class GameTopChartsTabs extends StatefulWidget {
+class CourseYearTabs extends StatefulWidget {
   int colorVal;
-  GameTopChartsTabs(this.colorVal);
+  CourseYearTabs(this.colorVal);
 
-  _GameTopChartsTabsState createState() => _GameTopChartsTabsState();
+  _CourseYearTabsState createState() => _CourseYearTabsState();
 }
 
-class _GameTopChartsTabsState extends State<GameTopChartsTabs>
+class _CourseYearTabsState extends State<CourseYearTabs>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
 
@@ -83,8 +86,38 @@ class _GameTopChartsTabsState extends State<GameTopChartsTabs>
             ),
           ),
         ),
-        
+        body: new TabBarView(
+          controller: _tabController,
+          children: <Widget>[
+            TopFreeApps(),
+            TopFreeApps(),
+            TopFreeApps(),
+            TopFreeApps(),
+          ],
+        ),
       ),
     );
   }
+}
+
+Widget TopFreeApps() {
+    return Container(
+      child: ListView(
+        scrollDirection: Axis.vertical,
+        children: <Widget>[
+          ListTile(
+            title: Text(
+              'Semester 1',
+            ),
+          ),
+          ListTile(
+            title: Text(
+              'Semester 2',
+            ),
+          ),
+          SizedBox(height: 40.0),
+          
+        ],
+      ),
+    );
 }

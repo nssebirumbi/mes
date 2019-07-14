@@ -100,7 +100,7 @@ class _HomePageState extends State<HomePage> {
           body: TabBarView(
             children: <Widget>[
               HomeTopTabs(0xffff5722),//ff5722
-              GamesTopTabs(0xff3f51b5),//3f51b5
+              Courses(0xff3f51b5),//3f51b5
               MoviesTopTabs(0xffe91e63),//e91e63
               BooksTopTabs(0xff9c27b0), //9c27b0
               MusicTopTabs(0xff2196f3), //2196f3 //4CAF50
