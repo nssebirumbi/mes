@@ -23,10 +23,7 @@ class _HomePageState extends State<HomePage> {
           appBar: AppBar(
            // backgroundColor: Color(0xff109618),
             backgroundColor: PrimaryColor,
-            title: Padding(
-              padding: EdgeInsets.only(top: 8.0),
-              child: _GooglePlayAppBar(),
-            ),
+            
             bottom: TabBar(
               isScrollable: true,
               indicatorColor: Colors.white,
@@ -97,6 +94,37 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
+          drawer: new Drawer(
+            child: new ListView(
+                children: <Widget>[
+                  new UserAccountsDrawerHeader(
+                    accountName: new Text("Nicholas Henry Ssebirumbi"),
+                    accountEmail: new Text("nssebirumbi@gmail.com"),
+                    currentAccountPicture: new GestureDetector(
+                      child: new CircleAvatar(
+                        backgroundImage: AssetImage("images/politics.jpg"),
+                      ),
+                    ),
+                    decoration: new BoxDecoration(
+                      image: new DecorationImage(
+                          image: AssetImage("images/Cedat.jpg"),
+                          fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  new ListTile(
+                     title: new Text("Profile"),
+                  ),
+                  new ListTile(
+                    title: new Text("Committee Members"),
+                  ),
+                  new Divider(),
+                  new ListTile(
+                    title: new Text("Log out"),
+                  ),
+                ],
+            ),
+          ),
           body: TabBarView(
             children: <Widget>[
               HomeTopTabs(0xffff5722),//ff5722
@@ -110,33 +138,11 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-Widget _GooglePlayAppBar() {
-  return Container(
-    color: Colors.white,
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        Container(
-          child: IconButton(
-            icon: Icon(FontAwesomeIcons.bars),
-          ),
-        ),
-        Container(
-          child: Text(
-            'Search',
-            style: TextStyle(color: Colors.grey),
-          ),
-        ),
-        Container(
-          child: IconButton(
-              icon: Icon(
-                FontAwesomeIcons.microphone,
-                color: Colors.blueGrey,
-              ),
-              onPressed: null),
-        ),
-      ],
-    ),
-  );
+class universityImages extends StatelessWidget{
+  @override
+  Widget build(BuildContext context){
+    AssetImage assetImage = AssetImage('images/Cedat.jpg');
+    Image image = Image(image: assetImage, width: 130.0, height: 100.0,);
+    return Container(child: image,);
+  }
 }
-
