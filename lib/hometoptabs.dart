@@ -30,40 +30,53 @@ TabController _tabController;
     return DefaultTabController(
       length:5,
       child: Scaffold(
-        appBar: AppBar(
-          bottom: TabBar(
-            controller: _tabController,
-            isScrollable: true,
-            indicatorWeight: 4.0,
-            indicatorColor:Color(0xffff5722),
-            unselectedLabelColor: Colors.grey,
-            tabs: <Widget>[
-              Tab(
-                child:Text('All News',style: TextStyle( color: _tabController.index == 0
-                          ?  Color( widget.colorVal)
-                          : Colors.grey)),
+        appBar: new PreferredSize(
+          preferredSize: Size.fromHeight(kToolbarHeight),
+          child: new Container(
+            child: new SafeArea(
+              child: Column(
+                children: <Widget>[
+                  new Expanded(child: new Container()),
+                  new TabBar(
+                    isScrollable: true,
+                    controller: _tabController,
+                    labelPadding: EdgeInsets.all(10.0),
+                    indicatorColor: Color(widget.colorVal),
+                    indicatorWeight: 4.0,
+                    tabs: [
+                
+
+                      Text("All News",
+                          style: TextStyle(
+                              color: _tabController.index == 0
+                                  ? Color(widget.colorVal)
+                                  : Colors.black)),
+                      Text("Mentorship",
+                          style: TextStyle(
+                              color: _tabController.index == 1
+                                  ? Color(widget.colorVal)
+                                  : Colors.black)),
+                      Text("Scholarship",
+                          style: TextStyle(
+                              color: _tabController.index == 2
+                                  ? Color(widget.colorVal)
+                                  : Colors.black)),
+                      Text("Soccer",
+                          style: TextStyle(
+                              color: _tabController.index == 3
+                                  ? Color(widget.colorVal)
+                                  : Colors.black)),
+                      Text("Internship",
+                          style: TextStyle(
+                              color: _tabController.index == 3
+                                  ? Color(widget.colorVal)
+                                  : Colors.black)),
+            
+                    ],
+                  ),
+                ],
               ),
-              Tab(
-                child:Text('Mentorship',style: TextStyle( color: _tabController.index == 1
-                          ?  Color( widget.colorVal)
-                          : Colors.grey)),
-              ),
-              Tab(
-                child: Text('Scholarship',style: TextStyle( color: _tabController.index == 2
-                          ?  Color( widget.colorVal)
-                          : Colors.grey)),
-              ),
-              Tab(
-                child: Text('Soccer',style: TextStyle( color: _tabController.index == 3
-                          ?  Color( widget.colorVal)
-                          : Colors.grey)),
-              ),
-              Tab(
-                child: Text('Internship',style: TextStyle( color: _tabController.index == 4
-                          ?  Color( widget.colorVal)
-                          : Colors.grey)),
-              )
-            ],
+            ),
           ),
         ),
         body: TabBarView(

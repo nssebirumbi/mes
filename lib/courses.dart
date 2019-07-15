@@ -29,41 +29,51 @@ class _CoursesState extends State<Courses> with SingleTickerProviderStateMixin{
     return DefaultTabController(
       length: 5,
       child: Scaffold(
-        appBar: AppBar(
-          bottom: TabBar(
-            isScrollable: true,
-            indicatorWeight: 4.0,
-            indicatorColor:Color(0xff3f51b5),
-            unselectedLabelColor: Colors.grey,
-             controller: _tabController,
-            tabs: <Widget>[
-              Tab(
-                child:Text('Civil',style: TextStyle( color: _tabController.index == 0
-                          ?  Color( widget.colorVal)
-                          : Colors.grey)),
+        appBar: new PreferredSize(
+          preferredSize: Size.fromHeight(kToolbarHeight),
+          child: new Container(
+            child: new SafeArea(
+              child: Column(
+                children: <Widget>[
+                  new Expanded(child: new Container()),
+                  new TabBar(
+                    isScrollable: true,
+                    controller: _tabController,
+                    labelPadding: EdgeInsets.all(10.0),
+                    indicatorColor: Color(widget.colorVal),
+                    indicatorWeight: 4.0,
+                    tabs: [
+                      
+                      Text("Civil",
+                          style: TextStyle(
+                              color: _tabController.index == 0
+                                  ? Color(widget.colorVal)
+                                  : Colors.black)),
+                      Text("Electrical",
+                          style: TextStyle(
+                              color: _tabController.index == 1
+                                  ? Color(widget.colorVal)
+                                  : Colors.black)),
+                      Text("Telcommunication",
+                          style: TextStyle(
+                              color: _tabController.index == 2
+                                  ? Color(widget.colorVal)
+                                  : Colors.black)),
+                      Text("Mechanical",
+                          style: TextStyle(
+                              color: _tabController.index == 3
+                                  ? Color(widget.colorVal)
+                                  : Colors.black)),
+                      Text("Computer Engineering",
+                          style: TextStyle(
+                              color: _tabController.index == 3
+                                  ? Color(widget.colorVal)
+                                  : Colors.black)),
+                    ],
+                  ),
+                ],
               ),
-              Tab(
-                child: Text('Electrical',style: TextStyle( color: _tabController.index == 1
-                          ?  Color( widget.colorVal)
-                          : Colors.grey)),
-              ),
-              Tab(
-                child: Text('Telcommunication',style: TextStyle( color: _tabController.index == 2
-                          ?  Color( widget.colorVal)
-                          : Colors.grey)),
-              ),
-              
-              Tab(
-                child: Text('Mechanical',style: TextStyle( color: _tabController.index == 4
-                          ?  Color( widget.colorVal)
-                          : Colors.grey)),
-              ),
-              Tab(
-                child: Text('Computer Engineering',style: TextStyle( color: _tabController.index == 5
-                          ?  Color( widget.colorVal)
-                          : Colors.grey)),
-              ),
-            ],
+            ),
           ),
         ),
         body: TabBarView(
@@ -79,16 +89,4 @@ class _CoursesState extends State<Courses> with SingleTickerProviderStateMixin{
       ),
     );
   }
-}
-
-Widget TopFreeApps() {
-    return Container(
-      child: ListView(
-        scrollDirection: Axis.vertical,
-        children: <Widget>[
-          SizedBox(height: 40.0)
-          
-        ],
-      ),
-    );
 }
