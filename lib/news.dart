@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'committeemembers.dart';
 import 'hometoptabs.dart';
 import 'courses.dart';
 import 'forumtab.dart';
+import 'profile.dart';
 import 'timetablestab.dart';
 import 'musictoptabs.dart';
 
@@ -113,10 +115,18 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   new ListTile(
-                     title: new Text("Profile"),
+                    title: new Text("Profile"),
+                    onTap: () {
+                      Navigator.of(context).pop();
+                      Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new Profile()));
+                    }
                   ),
                   new ListTile(
                     title: new Text("Committee Members"),
+                    onTap: () {
+                      Navigator.of(context).pop();
+                      Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new CommitteeMembers()));
+                    }
                   ),
                   new Divider(),
                   new ListTile(
@@ -135,14 +145,5 @@ class _HomePageState extends State<HomePage> {
             ],
           )),
     );
-  }
-}
-
-class universityImages extends StatelessWidget{
-  @override
-  Widget build(BuildContext context){
-    AssetImage assetImage = AssetImage('images/Cedat.jpg');
-    Image image = Image(image: assetImage, width: 130.0, height: 100.0,);
-    return Container(child: image,);
   }
 }

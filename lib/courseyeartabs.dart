@@ -3,6 +3,7 @@ import 'package:flutternestedtabsapp/semester.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:path/path.dart';
 import 'semester.dart';
+import 'yearcontents.dart';
 
 class CourseYearTabs extends StatefulWidget {
   int colorVal;
@@ -89,35 +90,13 @@ class _CourseYearTabsState extends State<CourseYearTabs>
         body: new TabBarView(
           controller: _tabController,
           children: <Widget>[
-            TopFreeApps(),
-            TopFreeApps(),
-            TopFreeApps(),
-            TopFreeApps(),
+            YearContent(),
+            YearContent(),
+            YearContent(),
+            YearContent(),
           ],
         ),
       ),
     );
   }
-}
-
-Widget TopFreeApps() {
-    return Container(
-      child: ListView(
-        scrollDirection: Axis.vertical,
-        children: <Widget>[
-          ListTile(
-            title: Text(
-              'Semester 1',
-            ),
-          ),
-          ListTile(
-            title: Text(
-              'Semester 2',
-            ),
-          ),
-          SizedBox(height: 40.0),
-          
-        ],
-      ),
-    );
 }

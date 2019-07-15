@@ -9,28 +9,27 @@ class Semester extends StatelessWidget {
         primaryColor: new Color(0xff3f51b5),
       ),
       home: DefaultTabController(
-        length: 4,
+        length: 3,
         child: Scaffold(
           appBar: AppBar(
             leading: IconButton(
               icon: Icon(Icons.arrow_back),
               onPressed: (){
-
+                Navigator.of(context).pop();
               }
             ),
             bottom: TabBar(
+              indicatorColor: Colors.white,
+              indicatorWeight: 4.0,
               tabs: [
                 Tab(
-                  child: Text("Notes"),
+                  child: Text("Handouts"),
                 ),
                 Tab(
                   child: Text("Past Papers"),
                 ),
                 Tab(
-                  child: Text("Notes"),
-                ),
-                Tab(
-                  child: Text("Handouts"),
+                  child: Text("Text Books"),
                 ),
               ],
             ),
@@ -38,16 +37,13 @@ class Semester extends StatelessWidget {
           body: TabBarView(
             children: [
               new Card(
-                color: Colors.white10,
+                color: Colors.white,
               ),
               new Card(
-                color: Colors.white10,
+                color: Colors.white,
               ),
               new Card(
-                color: Colors.white10,
-              ),
-              new Card(
-                color: Colors.white10,
+                color: Colors.white,
               ),
             ],
           ),
