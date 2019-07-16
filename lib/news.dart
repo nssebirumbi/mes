@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'chatscreen.dart';
 import 'committeemembers.dart';
+import 'forum.dart';
 import 'hometoptabs.dart';
 import 'courses.dart';
 import 'forumtab.dart';
@@ -120,6 +122,13 @@ class _HomePageState extends State<HomePage> {
                       Navigator.of(context).pop();
                       Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new Profile()));
                     }
+                  ),
+                  new ListTile(
+                      title: new Text("Chat"),
+                      onTap: () {
+                        Navigator.of(context).pop();
+                        Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new Forum()));
+                      }
                   ),
                   new ListTile(
                     title: new Text("Committee Members"),
