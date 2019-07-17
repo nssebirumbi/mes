@@ -9,6 +9,7 @@ import 'forumtab.dart';
 import 'profile.dart';
 import 'timetablestab.dart';
 import 'musictoptabs.dart';
+import 'utils/flutkart.dart';
 
 class HomePage extends StatefulWidget {
   final Widget child;
@@ -16,9 +17,46 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-Color PrimaryColor =  Color(0xff109618);
+Color PrimaryColor =  Color(0xff2196f3);
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with TickerProviderStateMixin{
+
+  AnimationController animCtrl;
+  Animation<double> animation;
+
+  AnimationController animCtrl2;
+  Animation<double> animation2;
+
+  bool showFirst = true;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Animation init
+    animCtrl = new AnimationController(
+        duration: new Duration(milliseconds: 500), vsync: this);
+    animation = new CurvedAnimation(parent: animCtrl, curve: Curves.easeOut);
+    animation.addListener(() {
+      this.setState(() {});
+    });
+    animation.addStatusListener((AnimationStatus status) {});
+
+    animCtrl2 = new AnimationController(
+        duration: new Duration(milliseconds: 1000), vsync: this);
+    animation2 = new CurvedAnimation(parent: animCtrl2, curve: Curves.easeOut);
+    animation2.addListener(() {
+      this.setState(() {});
+    });
+    animation2.addStatusListener((AnimationStatus status) {});
+  }
+
+  @override
+  void dispose() {
+    animCtrl.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -153,6 +191,7 @@ class _HomePageState extends State<HomePage> {
               MusicTopTabs(0xff2196f3), //2196f3 //4CAF50
             ],
           )),
+
     );
   }
 }

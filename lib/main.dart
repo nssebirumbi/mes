@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter NestedTabs Demo',
       theme: ThemeData(
-        primaryColor: Color(0xffffffff),
+        primaryColor: Color(0xff2196f3),
       ),
       home: HomePage(),
     );
