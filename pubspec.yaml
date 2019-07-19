@@ -1,4 +1,4 @@
-name: flutternestedtabsapp
+name: mesapp
 description: A new Flutter project.
 
 # The following defines the version and build number for your application.
@@ -50,7 +50,9 @@ flutter:
    - images/Scholarship.jpg
    - images/mentorship.jpg
    - images/politics.jpg
-   - images/cedat.png
+   - images/cedat.PNG
+   - images/drawer.jpg
+   - images/DSC02331.JPG
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.

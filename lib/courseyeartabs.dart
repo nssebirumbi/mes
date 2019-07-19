@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutternestedtabsapp/semester.dart';
+import 'package:mesapp/semester.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:path/path.dart';
 import 'semester.dart';

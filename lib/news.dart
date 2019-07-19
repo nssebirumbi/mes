@@ -10,6 +10,7 @@ import 'profile.dart';
 import 'timetablestab.dart';
 import 'musictoptabs.dart';
 import 'utils/flutkart.dart';
+import 'login.dart';
 
 class HomePage extends StatefulWidget {
   final Widget child;
@@ -144,12 +145,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin{
                     accountEmail: new Text("nssebirumbi@gmail.com"),
                     currentAccountPicture: new GestureDetector(
                       child: new CircleAvatar(
-                        backgroundImage: AssetImage("images/politics.jpg"),
+                        backgroundImage: AssetImage("images/DSC02331.JPG"),
                       ),
                     ),
                     decoration: new BoxDecoration(
                       image: new DecorationImage(
-                          image: AssetImage("images/Cedat.jpg"),
+                          image: AssetImage("images/drawer.jpg"),
                           fit: BoxFit.cover,
                       ),
                     ),
@@ -178,6 +179,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin{
                   new Divider(),
                   new ListTile(
                     title: new Text("Log out"),
+                    onTap: (){
+                      Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new LoginPage()));
+                    }
                   ),
                 ],
             ),

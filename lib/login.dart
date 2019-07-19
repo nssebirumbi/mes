@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'news.dart';
 //Creating the Login Page Class
 class LoginPage extends StatefulWidget{
   @override
@@ -44,11 +45,12 @@ class LoginPageState extends State<LoginPage> with SingleTickerProviderStateMixi
         fit: StackFit.expand,
         children: <Widget>[
           new Image(
-            image: new AssetImage("images/cedat.png"),
+            
             /*
               Box Fit makes the Image Cover the Entire Screen,
             */
             fit: BoxFit.cover,
+            image: AssetImage("images/cedat.PNG"),
             color: Colors.black54,
             colorBlendMode: BlendMode.darken,
           ),
@@ -97,7 +99,9 @@ class LoginPageState extends State<LoginPage> with SingleTickerProviderStateMixi
                           color: Colors.teal,
                           textColor: Colors.white,
                           child: new Text("Login"),
-                          onPressed: ()=>{},
+                          onPressed: () {
+                            Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new HomePage()));
+                          },
                           splashColor: Colors.redAccent,
                         ),
                       ],
