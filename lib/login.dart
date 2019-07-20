@@ -1,117 +1,101 @@
 import 'package:flutter/material.dart';
-import 'news.dart';
-//Creating the Login Page Class
-class LoginPage extends StatefulWidget{
+import 'package:mesapp/signup.dart';
+import 'package:mesapp/news.dart';
+class LoginPage extends StatefulWidget {
+  static String tag = 'login-page';
   @override
-  //LoginPageState class is created after this
-  State createState() => new LoginPageState();
+  _LoginPageState createState() => new _LoginPageState();
 }
-
-/*
-  LoginPageState class created here
-  it extends the Login state(the stateless widget we created above)
-  Here we shall have our Statefull widget Doing What we want.
-  In the Scaffold, we do the Designing
-*/
-class LoginPageState extends State<LoginPage> with SingleTickerProviderStateMixin{
-
-  AnimationController _iconAnimationController;
-  Animation<double> _iconAnimation;
-
+class _LoginPageState extends State<LoginPage> {
   @override
-  //overiding the initial State when the App loads
-  void initState(){
-    super.initState();
-    _iconAnimationController = new AnimationController(
-      vsync: this,
-      duration: new Duration(milliseconds: 300)
+  Widget build(BuildContext context) {
+    /**
+     * Back-ground Image for the Login Page But has Miss Behaved for now
+     */
+    // return Scaffold(
+    //   body: Container(
+    //     decoration: BoxDecoration(
+    //       image: DecorationImage(
+    //         image: AssetImage("assets/images/bulb.jpg"),
+    //         fit: BoxFit.cover,
+    //       ),
+    //     ),
+    //     child: null /* add child content here */,
+    //   ),
+    // );
+    final logo = Hero(
+      tag: 'hero',
+      child: CircleAvatar(
+        backgroundColor: Colors.transparent,
+        radius: 48.0,
+        child: Image.asset('images/logo.png'),
+      ),
     );
-    _iconAnimation = new CurvedAnimation(
-      parent: _iconAnimationController,
-      curve: Curves.easeOut
-    );
-    _iconAnimation.addListener(()=>this.setState((){}));
-    _iconAnimationController.forward();
-  }
 
-  @override
-  Widget build(BuildContext context){
-    return new Scaffold(
-      /*
-        Creating A background color for out page
-      */
-      backgroundColor: Colors.greenAccent,
-      body: new Stack(
-        fit: StackFit.expand,
-        children: <Widget>[
-          new Image(
-            
-            /*
-              Box Fit makes the Image Cover the Entire Screen,
-            */
-            fit: BoxFit.cover,
-            image: AssetImage("images/cedat.PNG"),
-            color: Colors.black54,
-            colorBlendMode: BlendMode.darken,
-          ),
-          new Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              new FlutterLogo(
-                size: _iconAnimation.value * 100,
-              ),
-              new Form(
-                child: new Theme(
-                  data: new ThemeData(
-                    brightness: Brightness.dark,
-                    primarySwatch: Colors.teal,
-                    inputDecorationTheme: new InputDecorationTheme(
-                      labelStyle: new TextStyle(
-                        color: Colors.teal,
-                        fontSize: 20.0,
-                      )
-                    )
-                  ),
-                  child: Container(
-                    padding: const EdgeInsets.all(40.0),
-                    child: new Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        new TextFormField(
-                          decoration: new InputDecoration(
-                            labelText: "Enter Email",
-                          ),
-                          keyboardType: TextInputType.emailAddress,
-                        ),
-                        new TextFormField(
-                          decoration: new InputDecoration(
-                            labelText: "Enter Password",
-                          ),
-                          keyboardType: TextInputType.text,
-                          obscureText: true,
-                        ),
-                        new Padding(
-                          padding: const EdgeInsets.only(top: 40.0),
-                        ),
-                        new MaterialButton(
-                          height: 40.0,
-                          minWidth: 120.0,
-                          color: Colors.teal,
-                          textColor: Colors.white,
-                          child: new Text("Login"),
-                          onPressed: () {
-                            Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new HomePage()));
-                          },
-                          splashColor: Colors.redAccent,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              )
-            ]
-          )
-        ],
+    final email = TextFormField(
+      keyboardType: TextInputType.emailAddress,
+      autofocus: false,
+      initialValue: 'julisema4@gmail.com',
+      decoration: InputDecoration(
+        hintText: 'Email',
+        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
+      ),
+    );
+
+    final password = TextFormField(
+      autofocus: false,
+      initialValue: 'paswordAdmin',
+      obscureText: true,
+      decoration: InputDecoration(
+        hintText: 'Password',
+        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
+      ),
+    );
+
+    final loginButton = Padding(
+      padding: EdgeInsets.symmetric(vertical: 16.0),
+      child: RaisedButton(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(24),
+        ),
+        onPressed: () {
+          Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new HomePage()));
+        },
+        padding: EdgeInsets.all(12),
+        color: Colors.lightBlueAccent,
+        child: Text('Log In', style: TextStyle(color: Colors.white)),
+      ),
+    );
+
+    final forgotLabel = FlatButton(
+      child: Text(
+        'Create Account?',
+        style: TextStyle(color: Colors.black54),
+      ),
+      onPressed: () {
+        Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new SignUp()));
+      },
+    );
+
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Center(
+        child: ListView(
+          shrinkWrap: true,
+          padding: EdgeInsets.only(left: 24.0, right: 24.0),
+          children: <Widget>[
+            logo,
+            SizedBox(height: 48.0),
+            email,
+            SizedBox(height: 18.0),
+            password,
+            SizedBox(height: 24.0),
+            loginButton,
+            forgotLabel
+          ],
+        ),
       ),
     );
   }

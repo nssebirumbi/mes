@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'login.dart';
-import 'news.dart';
 import 'pages/intro_screen.dart';
 import 'pages/splash_screen.dart';
 var routes = <String, WidgetBuilder>{

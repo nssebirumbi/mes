@@ -9,6 +9,7 @@ import 'awards.dart';
 import 'login.dart';
 
 class HomePage extends StatefulWidget {
+  static String tag = 'news-page';
   final Widget child;
   HomePage({Key key, this.child}) : super(key: key);
   _HomePageState createState() => _HomePageState();
