@@ -29,7 +29,14 @@ class IntroScreenState extends State<IntroScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color(0xFFEEEEEE),
+      decoration: BoxDecoration(
+        image: new DecorationImage(
+          image: AssetImage("images/civil.jpg"),
+          fit: BoxFit.cover,
+        ),
+        //color: Colors.redAccent
+      ),
+      //color: Color(0xFFEEEEEE),
       padding: EdgeInsets.all(10.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,

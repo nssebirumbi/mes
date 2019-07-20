@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mesapp/moviereleasetabs.dart';
 import 'login.dart';
 import 'news.dart';
-import 'pages/home_screen.dart';
 import 'pages/intro_screen.dart';
 import 'pages/splash_screen.dart';
 var routes = <String, WidgetBuilder>{

@@ -24,7 +24,13 @@ class _SplashScreenState extends State<SplashScreen> {
         fit: StackFit.expand,
         children: <Widget>[
           Container(
-            decoration: BoxDecoration(color: Colors.redAccent),
+            decoration: BoxDecoration(
+                image: new DecorationImage(
+                  image: AssetImage("images/splash.png"),
+                  fit: BoxFit.cover,
+                ),
+                //color: Colors.redAccent
+            ),
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -37,12 +43,8 @@ class _SplashScreenState extends State<SplashScreen> {
                     children: <Widget>[
                       CircleAvatar(
                         backgroundColor: Colors.white,
-                        radius: 50.0,
-                        child: Icon(
-                          Icons.shopping_cart,
-                          color: Colors.greenAccent,
-                          size: 50.0,
-                        ),
+                        radius: 70.0,
+                        backgroundImage: AssetImage("images/mak.png"),
                       ),
                       Padding(
                         padding: EdgeInsets.only(top: 10.0),
@@ -50,7 +52,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       Text(
                         Flutkart.name,
                         style: TextStyle(
-                            color: Colors.white,
+                            color: Colors.redAccent,
                             fontWeight: FontWeight.bold,
                             fontSize: 24.0),
                       )

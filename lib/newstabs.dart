@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'homeforyoutabs.dart';
-import 'hometopchartstabs.dart';
 
-class HomeTopTabs extends StatefulWidget {
+class NewsTabs extends StatefulWidget {
 
-  HomeTopTabs(this.colorVal);
+  NewsTabs(this.colorVal);
   int colorVal;
 
-  _HomeTopTabsState createState() => _HomeTopTabsState();
+  _NewsTabsState createState() => _NewsTabsState();
 }
 
-class _HomeTopTabsState extends State<HomeTopTabs> with SingleTickerProviderStateMixin{
+class _NewsTabsState extends State<NewsTabs> with SingleTickerProviderStateMixin{
 TabController _tabController;
 
 @override

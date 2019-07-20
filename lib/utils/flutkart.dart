@@ -1,18 +1,18 @@
 class Flutkart {
-  static const String name = "Flutkart";
-  static const String store = "Online Store\n For Everyone";
+  static const String name = "MES App";
+  static const String store = "A learning platform\n\n For Everyone";
   static const String wt1 = "WELCOME";
   static const String wc1 =
-      "Flutkart is Premium Online Shopping\n Platform for Everyone";
-  static const String wt2 = "DISCOVER PRODUCT";
+      "MES App is learning platform\n\n For CEDAT Scholars at Makerere University";
+  static const String wt2 = "DISCOVER OPPORTUNITIES";
   static const String wc2 =
-      "Search Latest and Featured Product\n With Best Price";
-  static const String wt3 = "ADD TO CART";
+      "Find scholarship opportunities\n\n Find internship placements";
+  static const String wt3 = "GET LATEST UPDATES";
   static const String wc3 =
-      "Add to Cart All Product You need\n And Checkout the Order";
-  static const String wt4 = "VERIFY AND RECEIVE";
+      "We provide you with the latest news\n\n Be the first to be updated";
+  static const String wt4 = "ARE YOU A NEW MEMBER?";
   static const String wc4 =
-      "We Will Verify Your Order\n Pay the bill and Receive the Product";
+      "Join us by signing up";
   static const String skip = "SKIP";
   static const String next = "NEXT";
   static const String gotIt = "GOT IT";

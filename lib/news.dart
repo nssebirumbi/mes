@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'chatscreen.dart';
 import 'committeemembers.dart';
 import 'forum.dart';
-import 'hometoptabs.dart';
+import 'newstabs.dart';
 import 'courses.dart';
-import 'forumtab.dart';
 import 'profile.dart';
 import 'timetablestab.dart';
-import 'musictoptabs.dart';
-import 'utils/flutkart.dart';
+import 'awards.dart';
 import 'login.dart';
 
 class HomePage extends StatefulWidget {
@@ -61,20 +57,21 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin{
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 5,
+      length: 4,
       child: Scaffold(
           appBar: AppBar(
            // backgroundColor: Color(0xff109618),
             backgroundColor: PrimaryColor,
+            title: Text("MES APP"),
             
             bottom: TabBar(
               isScrollable: true,
               indicatorColor: Colors.white,
               indicatorWeight: 4.0, 
-               onTap: (index){
+              onTap: (index){
                  setState(() {
-                  switch (index) {
-                    case 0:
+                    switch (index) {
+                      case 0:
                       PrimaryColor= Color(0xffff5722);
                       break;
                       case 1:
@@ -86,12 +83,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin{
                       case 3:
                       PrimaryColor= Color(0xff9c27b0);
                       break;
-                      case 4:
-                      PrimaryColor= Color(0xff2196f3);
-                      break;
-                    default:
+                      default:
+                    }
                   }
-            });
+                );
               },
               tabs: <Widget>[
                 Tab(
@@ -106,14 +101,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin{
                   child: Container(
                     child: Text(
                       'COURSES',
-                      style: TextStyle(color: Colors.white, fontSize: 18.0),
-                    ),
-                  ),
-                ),
-                Tab(
-                  child: Container(
-                    child: Text(
-                      'FORUM',
                       style: TextStyle(color: Colors.white, fontSize: 18.0),
                     ),
                   ),
@@ -163,7 +150,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin{
                     }
                   ),
                   new ListTile(
-                      title: new Text("Chat"),
+                      title: new Text("Forum"),
                       onTap: () {
                         Navigator.of(context).pop();
                         Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new Forum()));
@@ -188,13 +175,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin{
           ),
           body: TabBarView(
             children: <Widget>[
-              HomeTopTabs(0xffff5722),//ff5722
+              NewsTabs(0xffff5722),//ff5722
               Courses(0xff3f51b5),//3f51b5
-              MoviesTopTabs(0xffe91e63),//e91e63
-              BooksTopTabs(0xff9c27b0), //9c27b0
-              MusicTopTabs(0xff2196f3), //2196f3 //4CAF50
+              TimeTables(0xff9c27b0), //9c27b0
+              Awards(0xff2196f3) //2196f3 //4CAF50
             ],
-          )),
+          )
+      ),
 
     );
   }
