@@ -92,7 +92,7 @@ class _SignUpState extends State<SignUp> {
       ),
     );
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color.fromRGBO(100, 255, 255, 0.4),
       body: Center(
         child: ListView(
           shrinkWrap: true,
