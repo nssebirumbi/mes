@@ -9,13 +9,13 @@ class _SemesterState extends State<Semester>  {
 
   /*var contents = const [];
   Future<List<SemesterContents>> _getSemesterContents() async {
-     String content = await rootBundle.loadString('data/content.json');
-     List<SemesterContents> collection = json.decode(content);
-     List<SemesterContents> _content = collection.map((json)=>SemesterContents.fromJson(json)).toList();
+    String content = await rootBundle.loadString('data/content.json');
+    List<SemesterContents> collection = json.decode(content);
+    List<SemesterContents> _content = collection.map((json)=>SemesterContents.fromJson(json)).toList();
 
-     setState((){
-       contents = _content;
-     });
+    setState((){
+      contents = _content;
+    });
   }
 
   void initState(){

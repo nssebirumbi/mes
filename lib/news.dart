@@ -70,7 +70,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin{
               indicatorColor: Colors.white,
               indicatorWeight: 4.0, 
               onTap: (index){
-                 setState(() {
+                setState(() {
                     switch (index) {
                       case 0:
                       PrimaryColor= Color(0xffff5722);
