@@ -42,7 +42,6 @@ TabController _tabController;
                     indicatorWeight: 4.0,
                     tabs: [
                 
-
                       Text("All News",
                           style: TextStyle(
                               color: _tabController.index == 0

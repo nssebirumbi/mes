@@ -22,38 +22,210 @@ class _CommitteeMembers extends State<CommitteeMembers> {
         appBar: new AppBar(
           title: new Text("Committee Members"),
       ),
-        body: Stack(
-          children:<Widget>[
-          Container(
-            child: Column(
-              children:<Widget>[
-            DropdownButton(
-            hint: Text('Please choose a year'), // Not necessary for Option 1
-            value: _selectedYear,
-            onChanged: (newValue) {
-              setState(() {
-                _selectedYear = newValue;
-              });
-            },
-            items: _years.map((year) {
-              return DropdownMenuItem(
-                child: new Text(year),
-                value: year,
-              );
-            }).toList(),
-          ),
-          ],)
+      body: Center(
+        child: ListView(
+          children: <Widget>[
+                  Container(
+                    padding: const EdgeInsets.all(8.0),
+                    child: DropdownButton(
+                    hint: Text('2018-2019'), 
+                    value: _selectedYear,
+                    onChanged: (newValue) {
+                      setState(() {
+                        _selectedYear = newValue;
+                      });
+                    },
+                    items: _years.map((year) {
+                      return DropdownMenuItem(
+                        child: new Text(year),
+                        value: year,
+                      );
+                    }).toList(),
+                ),
+                  ),
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                        child: Column(
+                        children: <Widget>[
+                          CircleAvatar(
+                            backgroundImage: ExactAssetImage("images/cedat.PNG"),
+                            minRadius: 30,
+                            maxRadius: 70,
+                            ),
+                          SizedBox(height: 10,),
+                          Text("Julius Ssemakula", style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+                          SizedBox(height: 3,),
+                          Text("Head Of Dept", style: new TextStyle(fontStyle: FontStyle.italic,),),
+                          SizedBox(height: 30,)
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: Column(
+                        children: <Widget>[
+                          CircleAvatar(
+                            backgroundImage: ExactAssetImage("images/cedat.PNG"),
+                            minRadius: 30,
+                            maxRadius: 70,
+                            ),
+                          SizedBox(height: 10,),
+                          Text("Nicholus Bsw", style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+                          SizedBox(height: 3,),
+                          Text("Head Of Dept", style: new TextStyle(fontStyle: FontStyle.italic,),),
+                          SizedBox(height: 30,),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                        child: Column(
+                        children: <Widget>[
+                          CircleAvatar(
+                            backgroundImage: ExactAssetImage("images/cedat.PNG"),
+                            minRadius: 30,
+                            maxRadius: 70,
+                            ),
+                          SizedBox(height: 10,),
+                          Text("Julius Ssemakula", style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+                          SizedBox(height: 3,),
+                          Text("Head Of Dept", style: new TextStyle(fontStyle: FontStyle.italic,),),
+                          SizedBox(height: 30,)
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: Column(
+                        children: <Widget>[
+                          CircleAvatar(
+                            backgroundImage: ExactAssetImage("images/cedat.PNG"),
+                            minRadius: 30,
+                            maxRadius: 70,
+                            ),
+                          SizedBox(height: 10,),
+                          Text("Nicholus Bsw", style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+                          SizedBox(height: 3,),
+                          Text("Head Of Dept", style: new TextStyle(fontStyle: FontStyle.italic,),),
+                          SizedBox(height: 30,),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                        child: Column(
+                        children: <Widget>[
+                          CircleAvatar(
+                            backgroundImage: ExactAssetImage("images/cedat.PNG"),
+                            minRadius: 30,
+                            maxRadius: 70,
+                            ),
+                          SizedBox(height: 10,),
+                          Text("Julius Ssemakula", style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+                          SizedBox(height: 3,),
+                          Text("Head Of Dept", style: new TextStyle(fontStyle: FontStyle.italic,),),
+                          SizedBox(height: 30,)
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: Column(
+                        children: <Widget>[
+                          CircleAvatar(
+                            backgroundImage: ExactAssetImage("images/cedat.PNG"),
+                            minRadius: 30,
+                            maxRadius: 70,
+                            ),
+                          SizedBox(height: 10,),
+                          Text("Nicholus Bsw", style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+                          SizedBox(height: 3,),
+                          Text("Head Of Dept", style: new TextStyle(fontStyle: FontStyle.italic,),),
+                          SizedBox(height: 30,),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                        child: Column(
+                        children: <Widget>[
+                          CircleAvatar(
+                            backgroundImage: ExactAssetImage("images/cedat.PNG"),
+                            minRadius: 30,
+                            maxRadius: 70,
+                            ),
+                          SizedBox(height: 10,),
+                          Text("Julius Ssemakula", style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+                          SizedBox(height: 3,),
+                          Text("Head Of Dept", style: new TextStyle(fontStyle: FontStyle.italic,),),
+                          SizedBox(height: 30,)
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: Column(
+                        children: <Widget>[
+                          CircleAvatar(
+                            backgroundImage: ExactAssetImage("images/cedat.PNG"),
+                            minRadius: 30,
+                            maxRadius: 70,
+                            ),
+                          SizedBox(height: 10,),
+                          Text("Nicholus Bsw", style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+                          SizedBox(height: 3,),
+                          Text("Head Of Dept", style: new TextStyle(fontStyle: FontStyle.italic,),),
+                          SizedBox(height: 30,),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                        child: Column(
+                        children: <Widget>[
+                          CircleAvatar(
+                            backgroundImage: ExactAssetImage("images/cedat.PNG"),
+                            minRadius: 30,
+                            maxRadius: 70,
+                            ),
+                          SizedBox(height: 10,),
+                          Text("Julius Ssemakula", style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+                          SizedBox(height: 3,),
+                          Text("Head Of Dept", style: new TextStyle(fontStyle: FontStyle.italic,),),
+                          SizedBox(height: 30,)
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: Column(
+                        children: <Widget>[
+                          CircleAvatar(
+                            backgroundImage: ExactAssetImage("images/cedat.PNG"),
+                            minRadius: 30,
+                            maxRadius: 70,
+                            ),
+                          SizedBox(height: 10,),
+                          Text("Nicholus Bsw", style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+                          SizedBox(height: 3,),
+                          Text("Head Of Dept", style: new TextStyle(fontStyle: FontStyle.italic,),),
+                          SizedBox(height: 30,),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+          ],),
         ),
-        Container(
-              padding: new EdgeInsets.fromLTRB(8.0, 45.0, 8.0, 8.0),
-              child: new Image.asset("images/Cedat.jpg",height: 150.0, width: 130.0,fit: BoxFit.cover),
-        ),
-        Container(
-              padding: new EdgeInsets.fromLTRB(200.0, 45.0, 8.0, 8.0),
-              child: new Text("Ssemakula Julius"),
-        ),
-        ]
       ),
-    ),);
+    );
   }
 }
