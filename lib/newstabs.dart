@@ -1,4 +1,12 @@
+import 'dart:async';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:mesapp/apiservices.dart';
+
+
+import 'singlenews.dart';
 
 class NewsTabs extends StatefulWidget {
 
@@ -11,10 +19,12 @@ class NewsTabs extends StatefulWidget {
 class _NewsTabsState extends State<NewsTabs> with SingleTickerProviderStateMixin{
 TabController _tabController;
 
+Future<Post> post;
+
 @override
     void initState() {
       super.initState();
-      _tabController = new TabController(vsync: this, length: 5);
+      _tabController = new TabController(vsync: this, length: 4);
       _tabController.addListener(_handleTabSelection);
     }
     void _handleTabSelection() {
@@ -25,7 +35,7 @@ TabController _tabController;
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length:5,
+      length:4,
       child: Scaffold(
         appBar: new PreferredSize(
           preferredSize: Size.fromHeight(kToolbarHeight),
@@ -41,25 +51,19 @@ TabController _tabController;
                     indicatorColor: Color(widget.colorVal),
                     indicatorWeight: 4.0,
                     tabs: [
-                
-                      Text("All News",
+                      Text("Mentorship",
                           style: TextStyle(
                               color: _tabController.index == 0
                                   ? Color(widget.colorVal)
                                   : Colors.black)),
-                      Text("Mentorship",
+                      Text("Scholarship",
                           style: TextStyle(
                               color: _tabController.index == 1
                                   ? Color(widget.colorVal)
                                   : Colors.black)),
-                      Text("Scholarship",
-                          style: TextStyle(
-                              color: _tabController.index == 2
-                                  ? Color(widget.colorVal)
-                                  : Colors.black)),
                       Text("Soccer",
                           style: TextStyle(
-                              color: _tabController.index == 3
+                              color: _tabController.index == 2
                                   ? Color(widget.colorVal)
                                   : Colors.black)),
                       Text("Internship",
@@ -77,591 +81,155 @@ TabController _tabController;
         ),
         body: TabBarView(
           controller: _tabController,
+          
             children: <Widget>[
-          ListView(
-              padding: EdgeInsets.only(left: 10.0, top: 5.0, right: 10.0),
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Expanded(child: Text(
-                      "Welcoming Freshers at CEDAT (Makerere University Kampala)",
-                      textDirection: TextDirection.ltr,
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        decoration: TextDecoration.none,
-                        fontSize: 14.0,
-                        fontFamily: 'Raleway',
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black
-                      )
-                    )),
-                    new VerticalDivider(),
-                    universityImages()
-                  ],
-                ),
-                new Divider(),
-                Row(
-                  children: <Widget>[
-                    Expanded(child: Text(
-                      "Uganda Makes it to the Quater Finals",
-                      textDirection: TextDirection.ltr,
-                      style: TextStyle(
-                        decoration: TextDecoration.none,
-                        fontSize: 16.0,
-                        fontFamily: 'Raleway',
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black
-                      )
-                    )),
-                    new VerticalDivider(),
-                    cranesImage()
-                  ],
-                ),
-                new Divider(),
-                Row(
-                  children: <Widget>[
-                    Expanded(child: Text(
-                      "Ministry Of Sports and Education Releases a list On Intern Winners",
-                      textDirection: TextDirection.ltr,
-                      style: TextStyle(
-                        decoration: TextDecoration.none,
-                        fontSize: 16.0,
-                        fontFamily: 'Raleway',
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black
-                      )
-                    )),
-                    new VerticalDivider(),
-                    ministryOfSports()
-                  ],
-                ),
-              new Divider(),
-                Row(
-                  children: <Widget>[
-                    Expanded(child: Text(
-                      "Scholarship Program",
-                      textDirection: TextDirection.ltr,
-                      style: TextStyle(
-                        decoration: TextDecoration.none,
-                        fontSize: 16.0,
-                        fontFamily: 'Raleway',
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black
-                      )
-                    )),
-                    new VerticalDivider(),
-                    scholarship()
-                  ],
-                ),
-              new Divider(),
-                Row(
-                  children: <Widget>[
-                    Expanded(child: Text(
-                      "Cedat Mentorship",
-                      textDirection: TextDirection.ltr,
-                      style: TextStyle(
-                        decoration: TextDecoration.none,
-                        fontSize: 16.0,
-                        fontFamily: 'Raleway',
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black
-                      )
-                    )),
-                    new VerticalDivider(),
-                    mentorship()
-                  ],
-                ),
-              new Divider(),
-                Row(
-                  children: <Widget>[
-                    Expanded(child: Text(
-                      "People Contest Over Bobiwines Arrest",
-                      textDirection: TextDirection.ltr,
-                      style: TextStyle(
-                        decoration: TextDecoration.none,
-                        fontSize: 16.0,
-                        fontFamily: 'Raleway',
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black
-                      )
-                    )),
-                    new VerticalDivider(),
-                    politics()
-                  ],
-                ),
-            ],),
+              FutureBuilder(
+                future: ApiServices.getNewsList(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    final posts = snapshot.data;
+                    return ListView.separated(
+                      separatorBuilder: (context, index) {
+                        return Divider(height: 2, color: Colors.black,);
+                      },
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          title: new Text(
+                            posts[index]['headline'],
+                            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                          ),
+                          leading: Image.asset(
+                            'images/Cedat.jpg', 
+                            width: 100.0, 
+                            height: 100.0,
+                          ), 
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Post(posts[index]['id'])
+                              )
+                            );
+                          },
+                        );
+                      },
+                      itemCount: posts.length,
+                    );
+                  }
+                  return Center(child: CircularProgressIndicator(),);
+                },
+              ),
 
-            /*
-            End of the All news Widget
-            Start of the Mentorship Widget
-            List showing the Mentorship Widget
-            */
-            ListView(
-              padding: EdgeInsets.only(left: 10.0, top: 5.0, right: 10.0),
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Expanded(child: Text(
-                      "Welcoming Freshers at CEDAT (Makerere University Kampala)",
-                      textDirection: TextDirection.ltr,
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        decoration: TextDecoration.none,
-                        fontSize: 14.0,
-                        fontFamily: 'Raleway',
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black
-                      )
-                    )),
-                    new VerticalDivider(),
-                    universityImages()
-                  ],
-                ),
-                new Divider(),
-                Row(
-                  children: <Widget>[
-                    Expanded(child: Text(
-                      "Uganda Makes it to the Quater Finals",
-                      textDirection: TextDirection.ltr,
-                      style: TextStyle(
-                        decoration: TextDecoration.none,
-                        fontSize: 16.0,
-                        fontFamily: 'Raleway',
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black
-                      )
-                    )),
-                    new VerticalDivider(),
-                    cranesImage()
-                  ],
-                ),
-                new Divider(),
-                Row(
-                  children: <Widget>[
-                    Expanded(child: Text(
-                      "Ministry Of Sports and Education Releases a list On Intern Winners",
-                      textDirection: TextDirection.ltr,
-                      style: TextStyle(
-                        decoration: TextDecoration.none,
-                        fontSize: 16.0,
-                        fontFamily: 'Raleway',
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black
-                      )
-                    )),
-                    new VerticalDivider(),
-                    ministryOfSports()
-                  ],
-                ),
-              new Divider(),
-                Row(
-                  children: <Widget>[
-                    Expanded(child: Text(
-                      "Scholarship Program",
-                      textDirection: TextDirection.ltr,
-                      style: TextStyle(
-                        decoration: TextDecoration.none,
-                        fontSize: 16.0,
-                        fontFamily: 'Raleway',
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black
-                      )
-                    )),
-                    new VerticalDivider(),
-                    scholarship()
-                  ],
-                ),
-              new Divider(),
-                Row(
-                  children: <Widget>[
-                    Expanded(child: Text(
-                      "Cedat Mentorship",
-                      textDirection: TextDirection.ltr,
-                      style: TextStyle(
-                        decoration: TextDecoration.none,
-                        fontSize: 16.0,
-                        fontFamily: 'Raleway',
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black
-                      )
-                    )),
-                    new VerticalDivider(),
-                    mentorship()
-                  ],
-                ),
-              new Divider(),
-                Row(
-                  children: <Widget>[
-                    Expanded(child: Text(
-                      "People Contest Over Bobiwines Arrest",
-                      textDirection: TextDirection.ltr,
-                      style: TextStyle(
-                        decoration: TextDecoration.none,
-                        fontSize: 16.0,
-                        fontFamily: 'Raleway',
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black
-                      )
-                    )),
-                    new VerticalDivider(),
-                    politics()
-                  ],
-                ),
-            ]),
-            /*
-            End of the All news Widget
-            Start of the Mentorship Widget
-            List showing the Mentorship Widget
-            */
-            ListView(
-              padding: EdgeInsets.only(left: 10.0, top: 5.0, right: 10.0),
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Expanded(child: Text(
-                      "Welcoming Freshers at CEDAT (Makerere University Kampala)",
-                      textDirection: TextDirection.ltr,
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        decoration: TextDecoration.none,
-                        fontSize: 14.0,
-                        fontFamily: 'Raleway',
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black
-                      )
-                    )),
-                    new VerticalDivider(),
-                    universityImages()
-                  ],
-                ),
-                new Divider(),
-                Row(
-                  children: <Widget>[
-                    Expanded(child: Text(
-                      "Uganda Makes it to the Quater Finals",
-                      textDirection: TextDirection.ltr,
-                      style: TextStyle(
-                        decoration: TextDecoration.none,
-                        fontSize: 16.0,
-                        fontFamily: 'Raleway',
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black
-                      )
-                    )),
-                    new VerticalDivider(),
-                    cranesImage()
-                  ],
-                ),
-                new Divider(),
-                Row(
-                  children: <Widget>[
-                    Expanded(child: Text(
-                      "Ministry Of Sports and Education Releases a list On Intern Winners",
-                      textDirection: TextDirection.ltr,
-                      style: TextStyle(
-                        decoration: TextDecoration.none,
-                        fontSize: 16.0,
-                        fontFamily: 'Raleway',
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black
-                      )
-                    )),
-                    new VerticalDivider(),
-                    ministryOfSports()
-                  ],
-                ),
-              new Divider(),
-                Row(
-                  children: <Widget>[
-                    Expanded(child: Text(
-                      "Scholarship Program",
-                      textDirection: TextDirection.ltr,
-                      style: TextStyle(
-                        decoration: TextDecoration.none,
-                        fontSize: 16.0,
-                        fontFamily: 'Raleway',
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black
-                      )
-                    )),
-                    new VerticalDivider(),
-                    scholarship()
-                  ],
-                ),
-              new Divider(),
-                Row(
-                  children: <Widget>[
-                    Expanded(child: Text(
-                      "Cedat Mentorship",
-                      textDirection: TextDirection.ltr,
-                      style: TextStyle(
-                        decoration: TextDecoration.none,
-                        fontSize: 16.0,
-                        fontFamily: 'Raleway',
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black
-                      )
-                    )),
-                    new VerticalDivider(),
-                    mentorship()
-                  ],
-                ),
-              new Divider(),
-                Row(
-                  children: <Widget>[
-                    Expanded(child: Text(
-                      "People Contest Over Bobiwines Arrest",
-                      textDirection: TextDirection.ltr,
-                      style: TextStyle(
-                        decoration: TextDecoration.none,
-                        fontSize: 16.0,
-                        fontFamily: 'Raleway',
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black
-                      )
-                    )),
-                    new VerticalDivider(),
-                    politics()
-                  ],
-                ),
-            ]
-          ),
-          /*
-            End of the Mentorship Widget
-            Start of the Scholarship Widget
-            List showing the Scholarships Widget
-            */
-              ListView(
-              padding: EdgeInsets.only(left: 10.0, top: 5.0, right: 10.0),
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Expanded(child: Text(
-                      "Welcoming Freshers at CEDAT (Makerere University Kampala)",
-                      textDirection: TextDirection.ltr,
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        decoration: TextDecoration.none,
-                        fontSize: 14.0,
-                        fontFamily: 'Raleway',
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black
-                      )
-                    )),
-                    new VerticalDivider(),
-                    universityImages()
-                  ],
-                ),
-                new Divider(),
-                Row(
-                  children: <Widget>[
-                    Expanded(child: Text(
-                      "Uganda Makes it to the Quater Finals",
-                      textDirection: TextDirection.ltr,
-                      style: TextStyle(
-                        decoration: TextDecoration.none,
-                        fontSize: 16.0,
-                        fontFamily: 'Raleway',
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black
-                      )
-                    )),
-                    new VerticalDivider(),
-                    cranesImage()
-                  ],
-                ),
-                new Divider(),
-                Row(
-                  children: <Widget>[
-                    Expanded(child: Text(
-                      "Ministry Of Sports and Education Releases a list On Intern Winners",
-                      textDirection: TextDirection.ltr,
-                      style: TextStyle(
-                        decoration: TextDecoration.none,
-                        fontSize: 16.0,
-                        fontFamily: 'Raleway',
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black
-                      )
-                    )),
-                    new VerticalDivider(),
-                    ministryOfSports()
-                  ],
-                ),
-              new Divider(),
-                Row(
-                  children: <Widget>[
-                    Expanded(child: Text(
-                      "Scholarship Program",
-                      textDirection: TextDirection.ltr,
-                      style: TextStyle(
-                        decoration: TextDecoration.none,
-                        fontSize: 16.0,
-                        fontFamily: 'Raleway',
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black
-                      )
-                    )),
-                    new VerticalDivider(),
-                    scholarship()
-                  ],
-                ),
-              new Divider(),
-                Row(
-                  children: <Widget>[
-                    Expanded(child: Text(
-                      "Cedat Mentorship",
-                      textDirection: TextDirection.ltr,
-                      style: TextStyle(
-                        decoration: TextDecoration.none,
-                        fontSize: 16.0,
-                        fontFamily: 'Raleway',
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black
-                      )
-                    )),
-                    new VerticalDivider(),
-                    mentorship()
-                  ],
-                ),
-              new Divider(),
-                Row(
-                  children: <Widget>[
-                    Expanded(child: Text(
-                      "People Contest Over Bobiwines Arrest",
-                      textDirection: TextDirection.ltr,
-                      style: TextStyle(
-                        decoration: TextDecoration.none,
-                        fontSize: 16.0,
-                        fontFamily: 'Raleway',
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black
-                      )
-                    )),
-                    new VerticalDivider(),
-                    politics()
-                  ],
-                ),
-            ]
-            ),
-          /*
-            End of the Scholarship Widget
-            Start of the Soccer Widget
-            List showing the Soccer Widget
-            */
-            ListView(
-              padding: EdgeInsets.only(left: 10.0, top: 5.0, right: 10.0),
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Expanded(child: Text(
-                      "Welcoming Freshers at CEDAT (Makerere University Kampala)",
-                      textDirection: TextDirection.ltr,
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        decoration: TextDecoration.none,
-                        fontSize: 14.0,
-                        fontFamily: 'Raleway',
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black
-                      )
-                    )),
-                    new VerticalDivider(),
-                    universityImages()
-                  ],
-                ),
-                new Divider(),
-                Row(
-                  children: <Widget>[
-                    Expanded(child: Text(
-                      "Uganda Makes it to the Quater Finals",
-                      textDirection: TextDirection.ltr,
-                      style: TextStyle(
-                        decoration: TextDecoration.none,
-                        fontSize: 16.0,
-                        fontFamily: 'Raleway',
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black
-                      )
-                    )),
-                    new VerticalDivider(),
-                    cranesImage()
-                  ],
-                ),
-                new Divider(),
-                Row(
-                  children: <Widget>[
-                    Expanded(child: Text(
-                      "Ministry Of Sports and Education Releases a list On Intern Winners",
-                      textDirection: TextDirection.ltr,
-                      style: TextStyle(
-                        decoration: TextDecoration.none,
-                        fontSize: 16.0,
-                        fontFamily: 'Raleway',
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black
-                      )
-                    )),
-                    new VerticalDivider(),
-                    ministryOfSports()
-                  ],
-                ),
-              new Divider(),
-                Row(
-                  children: <Widget>[
-                    Expanded(child: Text(
-                      "Scholarship Program",
-                      textDirection: TextDirection.ltr,
-                      style: TextStyle(
-                        decoration: TextDecoration.none,
-                        fontSize: 16.0,
-                        fontFamily: 'Raleway',
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black
-                      )
-                    )),
-                    new VerticalDivider(),
-                    scholarship()
-                  ],
-                ),
-              new Divider(),
-                Row(
-                  children: <Widget>[
-                    Expanded(child: Text(
-                      "Cedat Mentorship",
-                      textDirection: TextDirection.ltr,
-                      style: TextStyle(
-                        decoration: TextDecoration.none,
-                        fontSize: 16.0,
-                        fontFamily: 'Raleway',
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black
-                      )
-                    )),
-                    new VerticalDivider(),
-                    mentorship()
-                  ],
-                ),
-              new Divider(),
-                Row(
-                  children: <Widget>[
-                    Expanded(child: Text(
-                      "People Contest Over Bobiwines Arrest",
-                      textDirection: TextDirection.ltr,
-                      style: TextStyle(
-                        decoration: TextDecoration.none,
-                        fontSize: 16.0,
-                        fontFamily: 'Raleway',
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black
-                      )
-                    )),
-                    new VerticalDivider(),
-                    politics()
-                  ],
-                ),
-            ]
-            ),
+              FutureBuilder(
+                future: ApiServices.getNewsList(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    final posts = snapshot.data;
+                    return ListView.separated(
+                      separatorBuilder: (context, index) {
+                        return Divider(height: 2, color: Colors.black,);
+                      },
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          title: new Text(
+                            posts[index]['headline'],
+                            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                          ),
+                          leading: Image.asset(
+                            'images/Cedat.jpg', 
+                            width: 100.0, 
+                            height: 100.0,
+                          ), 
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Post(posts[index]['id'])
+                              )
+                            );
+                          },
+                        );
+                      },
+                      itemCount: posts.length,
+                    );
+                  }
+                  return Center(child: CircularProgressIndicator(),);
+                },
+              ),
+
+              FutureBuilder(
+                future: ApiServices.getNewsList(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    final posts = snapshot.data;
+                    return ListView.separated(
+                      separatorBuilder: (context, index) {
+                        return Divider(height: 2, color: Colors.black,);
+                      },
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          title: new Text(
+                            posts[index]['headline'],
+                            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                          ),
+                          leading: Image.asset(
+                            'images/Cedat.jpg', 
+                            width: 100.0, 
+                            height: 100.0,
+                          ), 
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Post(posts[index]['id'])
+                              )
+                            );
+                          },
+                        );
+                      },
+                      itemCount: posts.length,
+                    );
+                  }
+                  return Center(child: CircularProgressIndicator(),);
+                },
+              ),
+
+              FutureBuilder(
+                future: ApiServices.getNewsList(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    final posts = snapshot.data;
+                    return ListView.separated(
+                      separatorBuilder: (context, index) {
+                        return Divider(height: 2, color: Colors.black,);
+                      },
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          title: new Text(
+                            posts[index]['headline'],
+                            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                          ),
+                          leading: Image.asset(
+                            'images/Cedat.jpg', 
+                            width: 100.0, 
+                            height: 100.0,
+                          ), 
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Post(posts[index]['id'])
+                              )
+                            );
+                          },
+                        );
+                      },
+                      itemCount: posts.length,
+                    );
+                  }
+                  return Center(child: CircularProgressIndicator(),);
+                },
+              ),
             ],
             /*
             End of the Soccer Widget
@@ -672,53 +240,69 @@ TabController _tabController;
   }
 }
 
-class universityImages extends StatelessWidget{
-  @override
-  Widget build(BuildContext context){
-    AssetImage assetImage = AssetImage('images/Cedat.jpg');
-    Image image = Image(image: assetImage, width: 130.0, height: 100.0,);
-    return Container(child: image,);
-  }
-}
-class cranesImage extends StatelessWidget{
-  @override
-  Widget build(BuildContext context){
-    AssetImage assetImage = AssetImage('images/cranes.jpg');
-    Image image = Image(image: assetImage, width: 130.0, height: 100.0,);
-    return Container(child: image,);
-  }
-}
-class ministryOfSports extends StatelessWidget{
-  @override
-  Widget build(BuildContext context){
-  AssetImage assetImage = AssetImage('images/Interns.png');
-  Image image = Image(image: assetImage, width: 130.0, height: 100.0,);
-  return Container(child: image,);
-  }
-}
-class scholarship extends StatelessWidget{
-  @override
-  Widget build(BuildContext context){
-    AssetImage assetImage = AssetImage('images/Scholarship.jpg');
-    Image image = Image(image: assetImage, width: 140.0, height: 100.0,);
-    return Container(child: image,);
-  }
-}
+class Post extends StatelessWidget {
+  final int _id;
 
-class mentorship extends StatelessWidget{
-  @override
-  Widget build(BuildContext context){
-    AssetImage assetImage = AssetImage('images/mentorship.jpg');
-    Image image = Image(image: assetImage, width: 140.0, height: 100.0,);
-    return Container(child: image);
-  }
-}
-class politics extends StatelessWidget{
-  @override
-  Widget build(BuildContext context){
-    AssetImage assetImage = AssetImage('images/politics.jpg');
-    Image image = Image(image: assetImage, width: 140.0, height:100.0,);
-    return Container(child: image,);
-  }
-}
+  Post(this._id);
 
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(),
+      body: SingleChildScrollView(
+        child: Column(
+        children: <Widget>[
+          FutureBuilder(
+            future: ApiServices.getPost(_id),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                return Column(
+                  children: <Widget>[
+
+                    Hero(
+                      tag: 'hero',
+                      child: Padding(
+                        padding: EdgeInsets.all(5.0),
+                        child: new Image(
+                          image: AssetImage('images/politics.jpg')
+                        )
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        snapshot.data['title'],
+                        style: TextStyle(fontSize: 20.0, color: Colors.black87,fontWeight: FontWeight.bold),
+                        
+                      )
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        snapshot.data['content'],
+                        style: TextStyle(fontSize: 16.0, color: Colors.black),
+                        textAlign: TextAlign.justify,
+                      )
+                    ),
+                    // Text(
+                    //   snapshot.data['title'],
+                    //   style: TextStyle(
+                    //     fontSize: 30,
+                    //     fontWeight: FontWeight.bold
+                    //   ),
+                    // ),
+                    // Text(snapshot.data['content']),
+                  ],
+                );
+              }
+              return Center(child: CircularProgressIndicator(),);
+            },
+          ),
+          
+        ],
+      ),
+      )
+    );
+  }
+}

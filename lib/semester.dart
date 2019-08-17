@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 import 'dart:convert';
+import 'package:http/http.dart' as http;
+
+
+import 'package:flutter/services.dart';
+
+import 'singleaward.dart';
 
 class Semester extends StatefulWidget {
   _SemesterState createState() => _SemesterState();
@@ -7,22 +14,22 @@ class Semester extends StatefulWidget {
 
 class _SemesterState extends State<Semester>  {
 
-  /*var contents = const [];
-  Future<List<SemesterContents>> _getSemesterContents() async {
-    String content = await rootBundle.loadString('data/content.json');
-    List<SemesterContents> collection = json.decode(content);
-    List<SemesterContents> _content = collection.map((json)=>SemesterContents.fromJson(json)).toList();
+  // var contents = const [];
+  // Future<List<SemesterContents>> _getSemesterContents() async {
+  //   String content = await rootBundle.loadString('data/content.json');
+  //   List<SemesterContents> collection = json.decode(content);
+  //   List<SemesterContents> _content = collection.map((json)=>SemesterContents.fromJson(json)).toList();
 
-    setState((){
-      contents = _content;
-    });
-  }
+  //   setState((){
+  //     contents = _content;
+  //   });
+  // }
 
-  void initState(){
-    _getSemesterContents();
-    super.initState();
-  }
-  List<Semester> content;*/
+  // void initState(){
+  //   _getSemesterContents();
+  //   super.initState();
+  // }
+  // List<Semester> content;
 
   @override
   Widget build(BuildContext context) {
@@ -71,51 +78,54 @@ class _SemesterState extends State<Semester>  {
                       leading: CircleAvatar(
                         child: Icon(Icons.picture_as_pdf),
                       ),
-                      onTap: (){},
+                      onTap: (){
+                        Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new SingleAward()));
+
+                      },
                     );
                   },
                 ),
                 //color: Colors.white,
               ),
               new Card(
-                child: new FutureBuilder(
-                  future: DefaultAssetBundle.of(context).loadString('data/content.json'),
-                  builder: (context, snapshot){
+                // child: new FutureBuilder(
+                //   future: DefaultAssetBundle.of(context).loadString('data/content.json'),
+                //   builder: (context, snapshot){
 
-                    var mydata = jsonDecode(snapshot.data.toString());
-                    return new ListView.builder(
-                      itemBuilder: (BuildContext context, int index) {
-                        return ListTile(
-                          title: Text(mydata[index]['name']),
-                          leading: CircleAvatar(
-                            child: Icon(Icons.picture_as_pdf),
-                          ),
-                        );
-                      },
-                      itemCount: mydata ==null? 0: mydata.length,
-                    );
-                  },
-                ),
+                //     var mydata = jsonDecode(snapshot.data.toString());
+                //     return new ListView.builder(
+                //       itemBuilder: (BuildContext context, int index) {
+                //         return ListTile(
+                //           title: Text(mydata[index]['name']),
+                //           leading: CircleAvatar(
+                //             child: Icon(Icons.picture_as_pdf),
+                //           ),
+                //         );
+                //       },
+                //       itemCount: mydata ==null? 0: mydata.length,
+                //     );
+                //   },
+                // ),
                 color: Colors.white,
               ),
               new Card(
-                child: new FutureBuilder(
-                  future: DefaultAssetBundle.of(context).loadString('data/content.json'),
-                  builder: (context, snapshot){
-                    var mydata = json.decode(snapshot.data.toString());
-                    return new ListView.builder(
-                      itemBuilder: (BuildContext context, int index) {
-                        return ListTile(
-                          title: Text(mydata['name']),
-                          leading: CircleAvatar(
-                            child: Icon(Icons.picture_as_pdf),
-                          ),
-                        );
-                      },
-                      itemCount: mydata ==null? 0: mydata.length,
-                    );
-                  },
-                ),
+                // child: new FutureBuilder(
+                //   future: DefaultAssetBundle.of(context).loadString('data/content.json'),
+                //   builder: (context, snapshot){
+                //     var mydata = json.decode(snapshot.data.toString());
+                //     return new ListView.builder(
+                //       itemBuilder: (BuildContext context, int index) {
+                //         return ListTile(
+                //           title: Text(mydata['name']),
+                //           leading: CircleAvatar(
+                //             child: Icon(Icons.picture_as_pdf),
+                //           ),
+                //         );
+                //       },
+                //       itemCount: mydata ==null? 0: mydata.length,
+                //     );
+                //   },
+                // ),
                 color: Colors.white,
               ),
             ],
@@ -124,14 +134,36 @@ class _SemesterState extends State<Semester>  {
       ),
     );
   }
+
+  // Future<Quote> getQuote() async {
+  //   String url = 'https://quotes.rest/qod.json';
+  //   final response =
+  //       await http.get(url, headers: {"Accept": "application/json"});
+
+
+  //   if (response.statusCode == 200) {
+  //     return Quote.fromJson(json.decode(response.body));
+  //   } else {
+  //     throw Exception('Failed to load post');
+  //   }
+  // }
 }
 
-class SemesterContents{
-  final String name;
+// class SemesterContents{
+//   final String name;
 
-  SemesterContents(this.name);
-  factory SemesterContents.fromJson(Map<String, dynamic> json){
-    return SemesterContents(json["name"]);
-  }
-}
+//   SemesterContents(this.name);
+//   factory SemesterContents.fromJson(Map<String, dynamic> json){
+//     return SemesterContents(json["name"]);
+//   }
+// }
 
+// class Quote {
+//   final String name;
+
+//   Quote({this.name});
+
+//   factory Quote.fromJson(Map<String, dynamic> json) {
+//     return Quote(json["name"]);
+//   }
+// }

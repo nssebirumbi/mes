@@ -34,11 +34,4 @@ class _YearContentState extends State<YearContent> {
     );
   }
 
-  Widget ImageContainer() {
-    return Container(
-      height: 200.0,
-      child: Center(child:Text('TopCharts')),
-    );
-  }
-
 }
