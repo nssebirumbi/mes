@@ -13,16 +13,10 @@ class Awards extends StatefulWidget {
 }
 
 class _AwardsState extends State<Awards> with SingleTickerProviderStateMixin{
-  TabController _tabController;
 
   @override
      void initState() {
        super.initState();
-     }
-     void _handleTabSelection() {
-        setState(() {
-          widget.colorVal=0xff2196f3;
-         });
      }
 
   @override

@@ -33,6 +33,14 @@ class ApiServices {
     return await _get('${Urls.BASE_URL}/awards/$awardId');
   }
 
+  static Future<List<dynamic>> getCommitteeList() async {
+    return await _get('${Urls.BASE_URL}/committees');
+  }
+
+  static Future<dynamic> getCommittee(int committeId) async {
+    return await _get('${Urls.BASE_URL}/committees/$committeId');
+  }
+
   static Future<dynamic> getPost(int postId) async {
     return await _get('${Urls.BASE_URL}/types/3/news/$postId');
   }
