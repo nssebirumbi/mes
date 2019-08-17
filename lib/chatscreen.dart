@@ -50,26 +50,34 @@ class ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return new Column(
-      children: <Widget>[
-        new Flexible(
-          child: new ListView.builder(
-            padding: new EdgeInsets.all(8.0),
-            reverse: true,
-            itemBuilder: (_, int index) => _messages[index],
-            itemCount: _messages.length,
+    return Container(
+      decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("asset/images/backgroung.jpg"),
+            fit: BoxFit.cover,
           ),
         ),
-        new Divider(
-          height: 1.0,
-        ),
-        new Container(
-          decoration: new BoxDecoration(
-            color: Theme.of(context).cardColor,
+        child: new Column(
+          children: <Widget>[
+            new Flexible(
+              child: new ListView.builder(
+                padding: new EdgeInsets.all(8.0),
+                reverse: true,
+                itemBuilder: (_, int index) => _messages[index],
+                itemCount: _messages.length,
+              ),
+            ),
+          new Divider(
+            height: 1.0,
           ),
-          child: _textComposerWidget(),
-        ),
-      ],
+          new Container(
+            decoration: new BoxDecoration(
+              color: Theme.of(context).cardColor,
+            ),
+            child: _textComposerWidget(),
+          ),
+        ],
+      ),
     );
   }
 }
