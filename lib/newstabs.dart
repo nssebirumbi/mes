@@ -84,7 +84,7 @@ Future<Post> post;
           
             children: <Widget>[
               FutureBuilder(
-                future: ApiServices.getNewsList(),
+                future: ApiServices.getNewsList(1),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
                     final posts = snapshot.data;
@@ -121,7 +121,7 @@ Future<Post> post;
               ),
 
               FutureBuilder(
-                future: ApiServices.getNewsList(),
+                future: ApiServices.getNewsList(2),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
                     final posts = snapshot.data;
@@ -158,7 +158,7 @@ Future<Post> post;
               ),
 
               FutureBuilder(
-                future: ApiServices.getNewsList(),
+                future: ApiServices.getNewsList(3),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
                     final posts = snapshot.data;
@@ -195,7 +195,7 @@ Future<Post> post;
               ),
 
               FutureBuilder(
-                future: ApiServices.getNewsList(),
+                future: ApiServices.getNewsList(4),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
                     final posts = snapshot.data;

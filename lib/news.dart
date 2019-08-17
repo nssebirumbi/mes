@@ -147,7 +147,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin{
                     title: new Text("Profile"),
                     onTap: () {
                       Navigator.of(context).pop();
-                      Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new Profile()));
+                      Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new Profile(2)));
                     }
                   ),
                   new ListTile(

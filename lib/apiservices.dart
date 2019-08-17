@@ -21,8 +21,12 @@ class ApiServices {
     return await _get('${Urls.BASE_URL}/users');
   }
 
-  static Future<List<dynamic>> getNewsList() async {
-    return await _get('${Urls.BASE_URL}/types/3/news');
+  static Future<dynamic> getUser(int userId) async {
+    return await _get('${Urls.BASE_URL}/users/$userId');
+  }
+
+  static Future<List<dynamic>> getNewsList(int typeId) async {
+    return await _get('${Urls.BASE_URL}/types/$typeId/news');
   }
 
   static Future<List<dynamic>> getAwardsList() async {
