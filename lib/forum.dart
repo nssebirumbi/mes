@@ -7,12 +7,17 @@ class Forum extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-        appBar: new AppBar(
-          backgroundColor: PrimaryColor,
-          title: new Text("MES Forum"),
-        ),
-        body: new ChatScreen()
+    return WillPopScope(
+      onWillPop: (){
+        Navigator.of(context).pop();
+      },
+      child: new Scaffold(
+          appBar: new AppBar(
+            backgroundColor: PrimaryColor,
+            title: new Text("MES Forum"),
+          ),
+          body: new ChatScreen()
+      ),
     );
   }
 }
