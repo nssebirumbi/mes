@@ -1,12 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:mesapp/apiservices.dart';
 
-
-import 'singlenews.dart';
 
 class NewsTabs extends StatefulWidget {
 
@@ -34,6 +33,7 @@ Future<Post> post;
     }
   @override
   Widget build(BuildContext context) {
+    
     return DefaultTabController(
       length:4,
       child: Scaffold(
@@ -247,6 +247,10 @@ class Post extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FirebaseAdMob.instance.initialize(appId: "ca-app-pub-2824369722414645~6114162264").then((response){
+      myBanner..load()..show();
+
+    });
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(),
@@ -254,7 +258,7 @@ class Post extends StatelessWidget {
         child: Column(
         children: <Widget>[
           FutureBuilder(
-            future: ApiServices.getPost(_id),
+            future: ApiServices.getNews(_id),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 return Column(
@@ -285,14 +289,6 @@ class Post extends StatelessWidget {
                         textAlign: TextAlign.justify,
                       )
                     ),
-                    // Text(
-                    //   snapshot.data['title'],
-                    //   style: TextStyle(
-                    //     fontSize: 30,
-                    //     fontWeight: FontWeight.bold
-                    //   ),
-                    // ),
-                    // Text(snapshot.data['content']),
                   ],
                 );
               }
@@ -305,4 +301,28 @@ class Post extends StatelessWidget {
       )
     );
   }
+
 }
+
+MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
+  keywords: <String>['games', 'pubg'],
+  contentUrl: 'https://flutter.io',
+  birthday: DateTime.now(),
+  childDirected: false,
+  designedForFamilies: false,
+  gender: MobileAdGender.male, // or MobileAdGender.female, MobileAdGender.unknown
+  testDevices: <String>[], // Android emulators are considered test devices
+);
+
+BannerAd myBanner = BannerAd(
+  // Replace the testAdUnitId with an ad unit id from the AdMob dash.
+  // https://developers.google.com/admob/android/test-ads
+  // https://developers.google.com/admob/ios/test-ads
+  adUnitId: BannerAd.testAdUnitId,
+  //adUnitId: "ca-app-pub-2824369722414645/8684485284",
+  size: AdSize.smartBanner,
+  targetingInfo: targetingInfo,
+  listener: (MobileAdEvent event) {
+    print("BannerAd event is $event");
+  },
+);

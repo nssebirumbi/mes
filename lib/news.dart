@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'committeemembers.dart';
 import 'forum.dart';
 import 'newstabs.dart';
@@ -18,6 +19,8 @@ class HomePage extends StatefulWidget {
 Color PrimaryColor =  Color(0xff2196f3);
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin{
+
+  //String _id = userId;
 
   AnimationController animCtrl;
   Animation<double> animation;
@@ -55,8 +58,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin{
     super.dispose();
   }
 
+  String name, email;
+  
   @override
   Widget build(BuildContext context) {
+
+   
     return DefaultTabController(
       length: 4,
       child: Scaffold(
@@ -129,11 +136,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin{
             child: new ListView(
                 children: <Widget>[
                   new UserAccountsDrawerHeader(
-                    accountName: new Text("Nicholas Henry Ssebirumbi"),
-                    accountEmail: new Text("nssebirumbi@gmail.com"),
+                    accountName: new Text(userName),
+                   accountEmail: new Text(userEmail),
                     currentAccountPicture: new GestureDetector(
                       child: new CircleAvatar(
-                        backgroundImage: AssetImage("images/DSC02331.JPG"),
+                        //backgroundImage: AssetImage("images/DSC02331.JPG"),
                       ),
                     ),
                     decoration: new BoxDecoration(
@@ -168,12 +175,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin{
                   new ListTile(
                     title: new Text("Log out"),
                     onTap: (){
-                      Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new LoginPage()));
+                      logout();
                     }
                   ),
                 ],
+              )
             ),
-          ),
           body: TabBarView(
             children: <Widget>[
               NewsTabs(0xffff5722),//ff5722
@@ -184,6 +191,21 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin{
           )
       ),
 
+    );
+  }
+
+
+  logout() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove("name");
+    prefs.remove("email");
+    prefs.remove("id");
+    prefs.remove("value");
+    prefs.commit();
+
+    Navigator.of(context).push(
+
+        new MaterialPageRoute(builder: (BuildContext context) => new LoginPage())
     );
   }
 }

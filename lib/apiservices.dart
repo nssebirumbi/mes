@@ -45,11 +45,33 @@ class ApiServices {
     return await _get('${Urls.BASE_URL}/committees/$committeId');
   }
 
-  static Future<dynamic> getPost(int postId) async {
-    return await _get('${Urls.BASE_URL}/types/3/news/$postId');
+  static Future<dynamic> getNews(int newsId) async {
+    return await _get('${Urls.BASE_URL}/types/3/news/$newsId');
+  }
+
+  static Future<dynamic> getPosts() async {
+    return await _get('${Urls.BASE_URL}/posts');
   }
 
   static Future<dynamic> getCommentsForPost(int postId) async {
     return await _get('${Urls.BASE_URL}/posts/$postId/comments');
+  }
+
+  static Future<bool> addPost(Map<String, dynamic> post) async {
+    try{
+      final response = await http.post('${Urls.BASE_URL}/posts', body: post);
+      return response.statusCode == 201;
+    }catch(e){
+      return false;
+    }
+  }
+
+  static Future<bool> addUser(Map<String, dynamic> user) async {
+    try{
+      final response = await http.post('${Urls.BASE_URL}/users', body: user);
+      return response.statusCode == 201;
+    }catch(e){
+      return false;
+    }
   }
 }

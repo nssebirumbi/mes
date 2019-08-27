@@ -7,10 +7,12 @@ class Walkthrough extends StatefulWidget {
   final imagecolor;
 
   Walkthrough(
-      {this.title,
-        this.content,
-        this.imageIcon,
-        this.imagecolor = Colors.redAccent});
+  {
+    this.title,
+    this.content,
+    this.imageIcon,
+    this.imagecolor = Colors.redAccent
+  });
 
   @override
   WalkthroughState createState() {

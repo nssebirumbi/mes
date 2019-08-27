@@ -1,8 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:mesapp/login.dart';
+import 'package:mesapp/pages/intro_screen.dart';
 import '../utils/flutkart.dart';
 import '../utils/my_navigator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -10,11 +13,30 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+
+  Future checkFirstSeen() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    bool _seen = (pref.getBool('seen') ?? false);
+
+    if (_seen) {
+    Navigator.of(context).pushReplacement(
+        new MaterialPageRoute(builder: (context) => new LoginPage()));
+    } else {
+    pref.setBool('seen', true);
+    Navigator.of(context).pushReplacement(
+        new MaterialPageRoute(builder: (context) => IntroScreen()));
+    }
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    Timer(Duration(seconds: 5), () => MyNavigator.goToIntro(context));
+    // Timer(Duration(seconds: 5), () => MyNavigator.goToIntro(context));
+    // checkFirstSeen();
+    new Timer(new Duration(milliseconds: 200), () {
+      checkFirstSeen();
+    });
   }
 
   @override

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:mesapp/apiservices.dart';
+import 'package:mesapp/login.dart';
 
 class Profile extends StatelessWidget {
   final int _id;
@@ -13,7 +14,7 @@ class Profile extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(),
       body: FutureBuilder(
-        future: ApiServices.getUser(_id),
+        future: ApiServices.getUser(int.parse(userId)),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             return new Container(
@@ -111,7 +112,7 @@ class Profile extends StatelessWidget {
                                     children: <Widget>[
                                       new Flexible(
                                         child: new Text(
-                                          snapshot.data['user_name'],
+                                          snapshot.data['name'],
                                         ),
                                       ),
                                     ],
@@ -146,7 +147,7 @@ class Profile extends StatelessWidget {
                                     children: <Widget>[
                                       new Flexible(
                                         child: new Text(
-                                          snapshot.data['user_email'],
+                                          snapshot.data['email'],
                                         ),
                                       ),
                                     ],
@@ -181,7 +182,7 @@ class Profile extends StatelessWidget {
                                     children: <Widget>[
                                       new Flexible(
                                         child: new Text(
-                                          snapshot.data['user_cont'],
+                                          snapshot.data['contact'],
                                         ),
                                       ),
                                     ],
@@ -230,7 +231,7 @@ class Profile extends StatelessWidget {
                                       Expanded(
                                         child: Container(
                                           child: new Text(
-                                            snapshot.data['user_course'],
+                                            snapshot.data['course'],
                                           ),
                                         ),
                                         flex: 3,
@@ -238,7 +239,7 @@ class Profile extends StatelessWidget {
                                       Expanded(
                                         child: Container(
                                           child: new Text(
-                                            snapshot.data['user_year'],
+                                            snapshot.data['year'],
                                           
                                           ),
                                         ),

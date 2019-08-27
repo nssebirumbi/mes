@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mesapp/apiservices.dart';
+import 'package:mesapp/login.dart';
 import 'chatmessage.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -11,13 +13,34 @@ class ChatScreenState extends State<ChatScreen> {
   final List<ChatMessage> _messages = <ChatMessage>[];
 
   void _handleSubmitted(String text) {
-    _textController.clear();
-    ChatMessage message = new ChatMessage(
-      text: text,
-    );
-    setState(() {
-      _messages.insert(0, message);
-    });
+    if(text.isEmpty){
+
+    }else{
+      final post = {
+        'message': text,
+        'user_id': userId
+      };
+
+      ApiServices.addPost(post).then((success){
+        
+        String title, text;
+        if (success){
+          title = "Success";
+          text = "Post submitted";
+        }else{
+          title = "Error";
+          text = "Error while submitting your Post";
+        }
+      });
+      _textController.clear();
+      ChatMessage message = new ChatMessage(
+        //text: text,
+      );
+      setState(() {
+        _messages.insert(0, message);
+      });
+    }
+    
   }
 
   Widget _textComposerWidget() {
@@ -59,12 +82,77 @@ class ChatScreenState extends State<ChatScreen> {
         ),
         child: new Column(
           children: <Widget>[
+            
             new Flexible(
-              child: new ListView.builder(
-                padding: new EdgeInsets.all(8.0),
-                reverse: true,
-                itemBuilder: (_, int index) => _messages[index],
-                itemCount: _messages.length,
+              
+              child: FutureBuilder(
+                future: ApiServices.getPosts(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    final posts = snapshot.data;
+                    
+                    return Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: ListView.builder(
+                        itemBuilder: (context, int index){
+                          return new Container(
+                          decoration: myBoxDecoration(),
+                          margin: const EdgeInsets.symmetric(vertical: 10.0),
+                          child: new Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Container(
+                                child: Expanded(
+                                  child: new Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Container(
+                                        padding: EdgeInsets.all(8.0),
+                                        decoration: new BoxDecoration(
+                                          //borderRadius: new BorderRadius.circular(10.0),
+                                          //color: Colors.white,
+                                        ),
+                                        child: Row(
+                                          children: <Widget>[
+                                            new Text(
+                                              posts[index]['user'],
+                                              style: TextStyle(color: Colors.greenAccent)
+                                            ) 
+                                          ]
+                                        ),
+                                      ),
+                                      new Container(
+                                        margin: const EdgeInsets.all(20.0),
+                                        child: new Text(posts[index]['message']),
+                                      ),
+                                      //Divider(),
+                                      new Container(
+                                        margin: const EdgeInsets.all(0.0),
+                                        child: Container(
+                                            margin: const EdgeInsets.all(0.0),
+                                            child: new IconButton(
+                                            icon: new Icon(Icons.comment),
+                                            onPressed: () => {
+                                              
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                        },
+                        itemCount: posts.length,
+                          
+                      ),
+                    );
+                  }
+                  return Center(child: CircularProgressIndicator(),);
+                },
               ),
             ),
           new Divider(
@@ -78,6 +166,15 @@ class ChatScreenState extends State<ChatScreen> {
           ),
         ],
       ),
+    );
+  }
+
+  BoxDecoration myBoxDecoration() {
+    return BoxDecoration(
+      borderRadius: BorderRadius.all(
+          Radius.circular(10.0) //         <--- border radius here
+      ),
+      color: Colors.white,
     );
   }
 }
